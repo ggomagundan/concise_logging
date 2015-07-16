@@ -36,13 +36,13 @@ Or install it yourself as:
 ## Usage
 
 Add this to your `config/production.rb`.  Configure tagging as per your desires.
-We use tagging to indicate application with a 2 letter code and environment with
-a single letter (e.g., p = production, s = staging).
+We use tagging to indicate application with a code and 
+environment with a triple letter (e.g., pro = production, dev = development).
 
 ```ruby
 # Configure logger to log warn and above
 config.log_level = :warn
-config.log_tags = ["cv-#{Rails.env[0]}"]
+config.log_tags = ["ggomagundan-#{Rails.env[0..2]}"]
 config.logger = ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new(File.join(Rails.root, "log", "#{Rails.env}.log")))
 ```
 
