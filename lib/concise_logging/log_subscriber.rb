@@ -36,7 +36,6 @@ module ConciseLogging
       message << " #{color(exception_details, RED)}" if exception_details.present?
       message << " Time:  (App: #{app}ms DB: #{db}ms)"
 
-      [KAI-dev] [2015-07-16 16:25:40 88917] GET    200 127.0.0.1       /new_goodoc/hospital_searches parameters={"latitude"=>"37.516034", "longitude"=>"127.022124", "q"=>"응급의료"} (app:410ms db:784ms)
 
       logger.warn message
     end
