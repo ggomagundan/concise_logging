@@ -14,7 +14,7 @@ module ConciseLogging
       path = payload[:path].to_s.gsub(/\?.*/, "")
       params = payload[:params].except(*INTERNAL_PARAMS)
 
-      current_time = Time.current.strftime("%Y-%m-%d %H:%M:%S.")
+      current_time = Time.current.strftime("%Y-%m-%d %H:%M:%S")
       ip = Thread.current[:logged_ip]
       location = Thread.current[:logged_location]
       Thread.current[:logged_location] = nil
@@ -24,7 +24,7 @@ module ConciseLogging
 
 
       message = format(
-        "%{current_time} %{method} %{status} %{ip} %{path}",
+        "%{current_time}  %{method} %{status} %{ip} %{path}",
         ip: format("%-15s", ip),
         method: format_method(format("%-6s", method)),
         status: format_status(status),
@@ -35,6 +35,8 @@ module ConciseLogging
       message << " parameters=#{params}" if params.present?
       message << " #{color(exception_details, RED)}" if exception_details.present?
       message << " Time:  (App: #{app}ms DB: #{db}ms)"
+
+      [KAI-dev] [2015-07-16 16:25:40 88917] GET    200 127.0.0.1       /new_goodoc/hospital_searches parameters={"latitude"=>"37.516034", "longitude"=>"127.022124", "q"=>"응급의료"} (app:410ms db:784ms)
 
       logger.warn message
     end
@@ -72,4 +74,5 @@ module ConciseLogging
       end
     end
   end
+
 end
